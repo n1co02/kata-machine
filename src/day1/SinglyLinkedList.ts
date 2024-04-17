@@ -2,6 +2,7 @@ type Node<T> = {
     value: T;
     next?: Node<T>;
 };
+
 export default class SinglyLinkedList<T> {
     public length: number;
     private head?: Node<T>;
@@ -16,6 +17,7 @@ export default class SinglyLinkedList<T> {
         this.head = newNode;
         this.length++;
     }
+
     insertAt(item: T, idx: number): void {
         if (idx < 0 || idx > this.length)
             throw new Error("Index out of bounds");
@@ -33,6 +35,7 @@ export default class SinglyLinkedList<T> {
         current!.next = newNode;
         this.length++;
     }
+
     append(item: T): void {
         const newNode: Node<T> = { value: item };
         if (!this.head) {
@@ -46,6 +49,7 @@ export default class SinglyLinkedList<T> {
         }
         this.length++;
     }
+
     remove(item: T): T | undefined {
         if (!this.head) {
             return undefined;
@@ -72,6 +76,7 @@ export default class SinglyLinkedList<T> {
 
         return undefined;
     }
+
     get(idx: number): T | undefined {
         if (idx < 0 || idx >= this.length) return undefined;
 
@@ -82,6 +87,7 @@ export default class SinglyLinkedList<T> {
 
         return current?.value;
     }
+
     removeAt(idx: number): T | undefined {
         if (idx < 0 || idx >= this.length)
             throw new Error("Index out of bounds");
