@@ -24,9 +24,8 @@ export default class SinglyLinkedList<T> {
         if (idx !== 0) {
             newNode.next = undefined; //for append
             let current = this.head;
-            for (let i = 0; i < idx - 1; i++) {
-                current = current!.next;
-            }
+            for (let i = 0; i < idx - 1; i++) current = current!.next;
+
             if (idx !== this.length) newNode.next = current!.next; //for append
             current!.next = newNode;
         }
@@ -60,9 +59,7 @@ export default class SinglyLinkedList<T> {
         if (idx < 0 || idx >= this.length) return undefined;
 
         let current = this.head;
-        for (let i = 0; i < idx; i++) {
-            current = current!.next;
-        }
+        for (let i = 0; i < idx; i++) current = current!.next;
 
         return current?.value;
     }
