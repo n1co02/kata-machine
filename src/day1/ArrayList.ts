@@ -24,6 +24,7 @@ export default class ArrayList<T> {
         this.data.push(item);
         this.length = this.data.length;
     }
+
     remove(item: T): T | undefined {
         const filteredItem = this.data.indexOf(item);
         if (filteredItem === -1) return undefined;
@@ -36,9 +37,8 @@ export default class ArrayList<T> {
     }
 
     removeAt(idx: number): T | undefined {
-        if (idx < 0 || idx >= this.data.length) {
-            return undefined;
-        }
+        if (idx < 0 || idx >= this.data.length) return undefined;
+
         this.length--;
         return this.data.splice(idx, 1)[0];
     }
