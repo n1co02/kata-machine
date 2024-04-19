@@ -8,8 +8,7 @@ export default class ArrayList<T> {
     }
 
     prepend(item: T): void {
-        this.data.unshift(item);
-        this.length = this.data.length;
+        this.insertAt(item, 0);
     }
 
     insertAt(item: T, idx: number): void {
