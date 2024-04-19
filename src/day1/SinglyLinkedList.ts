@@ -19,10 +19,9 @@ export default class SinglyLinkedList<T> {
     insertAt(item: T, idx: number): void {
         if (idx < 0 || idx > this.length)
             throw new Error("Index out of bounds");
-        const newNode: Node<T> = { value: item, next: this.head };
-        if (idx === 0) this.head = newNode;
+        if (idx === 0) this.head = { value: item, next: this.head } as Node<T>;
         if (idx !== 0) {
-            newNode.next = undefined; //for append
+            const newNode: Node<T> = { value: item, next: undefined };
             let current = this.head;
             for (let i = 0; i < idx - 1; i++) current = current!.next;
 
