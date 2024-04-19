@@ -33,8 +33,7 @@ export default class SinglyLinkedList<T> {
     }
 
     append(item: T): void {
-        const newNode: Node<T> = { value: item };
-        if (!this.head) this.head = newNode;
+        if (!this.head) this.head = { value: item } as Node<T>;
         if (this.head) this.insertAt(item, this.length);
     }
 
