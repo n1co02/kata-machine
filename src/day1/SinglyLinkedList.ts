@@ -13,65 +13,44 @@ export default class SinglyLinkedList<T> {
     }
 
     prepend(item: T): void {
-        const newNode: Node<T> = { value: item, next: this.head };
-        this.head = newNode;
-        this.length++;
+        this.insertAt(item, 0);
     }
 
     insertAt(item: T, idx: number): void {
         if (idx < 0 || idx > this.length)
             throw new Error("Index out of bounds");
-        if (idx === 0) {
-            this.prepend(item);
-            return;
+        const newNode: Node<T> = { value: item, next: this.head };
+        if (idx === 0) this.head = newNode;
+        if (idx !== 0) {
+            newNode.next = undefined; //for append
+            let current = this.head;
+            for (let i = 0; i < idx - 1; i++) {
+                current = current!.next;
+            }
+            if (idx !== this.length) newNode.next = current!.next; //for append
+            current!.next = newNode;
         }
-        const newNode: Node<T> = { value: item };
-        let current = this.head;
-        for (let i = 0; i < idx - 1; i++) {
-            current = current!.next;
-        }
-
-        newNode.next = current!.next;
-        current!.next = newNode;
         this.length++;
     }
 
     append(item: T): void {
         const newNode: Node<T> = { value: item };
-        if (!this.head) {
-            this.head = newNode;
-        } else {
-            let current = this.head;
-            while (current.next) {
-                current = current.next;
-            }
-            current.next = newNode;
-        }
-        this.length++;
+        if (!this.head) this.head = newNode;
+        if (this.head) this.insertAt(item, this.length);
     }
 
     remove(item: T): T | undefined {
-        if (!this.head) {
-            return undefined;
-        }
+        if (!this.head) return undefined;
 
-        if (this.head.value === item) {
-            const removedValue = this.head.value;
-            this.head = this.head.next;
-            this.length--;
-            return removedValue;
-        }
+        let index = 0;
+        if (this.head.value === item) return this.removeAt(index);
 
         let current = this.head;
-        while (current.next && current.next.value !== item) {
-            current = current.next;
-        }
+        while (current.next) {
+            index++;
+            if (current.next.value === item) return this.removeAt(index);
 
-        if (current.next) {
-            const removedValue = current.next.value;
-            current.next = current.next.next;
-            this.length--;
-            return removedValue;
+            current = current.next;
         }
 
         return undefined;
