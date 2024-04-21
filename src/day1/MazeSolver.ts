@@ -10,7 +10,9 @@ const walk = (
     wall: string,
     curr: Point,
     end: Point,
+    seen: boolean[][],
 ): boolean => {
+    //check if of the map
     if (
         curr.x < 0 ||
         curr.x >= maze[0].length ||
@@ -18,5 +20,12 @@ const walk = (
         curr.y >= maze.length
     )
         return false;
+
+    if (maze[curr.y][curr.x] === wall) return false; //if wall
+
+    if (curr.x === end.x && curr.y === end.y) return true; //if end
+
+    if (seen[curr.y][curr.x]) return false; //if already visited
+
     return true;
 };
