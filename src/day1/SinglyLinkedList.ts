@@ -33,7 +33,7 @@ export default class SinglyLinkedList<T> {
 
     append(item: T): void {
         if (!this.head) this.head = { value: item } as Node<T>;
-        if (this.head) this.insertAt(item, this.length);
+        if (this.head) return this.insertAt(item, this.length);
     }
 
     remove(item: T): T | undefined {
